@@ -52,6 +52,6 @@ function writeOrientationToDocument() {
     document.getElementById("zOrientattion").innerHTML = zOrientattion;
 }
 
-function stopListeningToDeviceMotion() {
+function stopListeningToDeviceOrientation() {
     window.removeEventListener('deviceorientation', orientationHandler);
 }
