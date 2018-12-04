@@ -1,14 +1,23 @@
 var xAcceleration;
 var yAcceleration;
 var zAcceleration;
+var xOrientattion;
+var yOrientattion;
+var zOrientattion;
 
-const func =  function(event) {
+const motionHandler =  function(event) {
     getAcceleration(event);
     writeAccelerationToDocument();
 };
 
+const orientationHandler = function(event) {
+    getOrienttion(event);
+    writeOrientationToDocument();
+
+}
+
 function startListeningToDeviceMotion() {
-    window.addEventListener('devicemotion', func);
+    window.addEventListener('devicemotion', motionHandler);
 }
 
 function getAcceleration(event) {
@@ -24,8 +33,25 @@ function writeAccelerationToDocument() {
 }
 
 function stopListeningToDeviceMotion() {
-    console.log("trying to remove devicemotion listener");
-    window.removeEventListener('devicemotion', func);
-    console.log("success?");
+    window.removeEventListener('devicemotion', motionHandler);
+}
 
+function startListeningToDeviceOrientation() {
+    window.addEventListener('deviceorientation', orientationHandler);
+}
+
+function getOrienttion(event) {
+    xOrientattion = event.alpha;
+    yOrientattion = event.beta;
+    zOrientattion = event.gama;
+}
+
+function writeOrientationToDocument() {
+    document.getElementById("xOrientattion").innerHTML = xOrientattion;
+    document.getElementById("yOrientattion").innerHTML = yOrientattion;
+    document.getElementById("zOrientattion").innerHTML = zOrientattion;
+}
+
+function stopListeningToDeviceMotion() {
+    window.removeEventListener('deviceorientation', orientationHandler);
 }
