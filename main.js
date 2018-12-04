@@ -43,7 +43,7 @@ function startListeningToDeviceOrientation() {
 function getOrienttion(event) {
     xOrientattion = event.alpha;
     yOrientattion = event.beta;
-    zOrientattion = event.gama;
+    zOrientattion = event.gamma;
 }
 
 function writeOrientationToDocument() {
