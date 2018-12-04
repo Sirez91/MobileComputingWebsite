@@ -2,11 +2,13 @@ var xAcceleration;
 var yAcceleration;
 var zAcceleration;
 
+const func =  function(event) {
+    getAcceleration(event);
+    writeAccelerationToDocument();
+};
+
 function startListeningToDeviceMotion() {
-    window.addEventListener('devicemotion', function(event) {
-        getAcceleration(event);
-        writeAccelerationToDocument();
-    });
+    window.addEventListener('devicemotion', func);
 }
 
 function getAcceleration(event) {
@@ -19,4 +21,11 @@ function writeAccelerationToDocument() {
     document.getElementById("xAcceleration").innerHTML = xAcceleration;
     document.getElementById("yAcceleration").innerHTML = yAcceleration;
     document.getElementById("zAcceleration").innerHTML = zAcceleration;
+}
+
+function stopListeningToDeviceMotion() {
+    console.log("trying to remove devicemotion listener");
+    window.removeEventListener('devicemotion', func);
+    console.log("success?");
+
 }
