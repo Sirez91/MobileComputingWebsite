@@ -58,15 +58,17 @@
 
     <div>
       <h1>Umgebungslicht auslesen</h1>
-      <button onclick="startListeningToDeviceLight()">
-        Auslesen starten
-      </button>
-      <button onclick="stopListeningToDeviceLight()">
-        Auslesen stoppen
-      </button>
-      <p>
-        Lumen: <span id="lumen"></span>
-      </p>
+      <button onclick="startListeningToDeviceLight()">Auslesen starten</button>
+      <button onclick="stopListeningToDeviceLight()">Auslesen stoppen</button>
+      <p>Lumen: <span id="lumen"></span></p>
+    </div>
+
+    <div>
+      <h1>Geolocation auslesen</h1>
+      <button onclick="startListeningToGeolocation()">Auslesen starten</button>
+      <button onclick="stopListeningToGeolocation()">Auslesen stoppen</button>
+      <p>Breitengrad: <span id="latitude"></span></p>
+      <p>Längengrad: <span id="longitude"></span></p>
     </div>
   </body>
 </html>

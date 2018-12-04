@@ -5,6 +5,14 @@ var xOrientattion;
 var yOrientattion;
 var zOrientattion;
 var lumen;
+var latitude;
+var longitude;
+var geolocationWatchId;
+
+const handleLocation = function(location) {
+    getGeolocation(location);
+    writeGeolocationToDocument();
+};
 
 const motionHandler =  function(event) {
     getAcceleration(event);
@@ -66,6 +74,7 @@ function stopListeningToDeviceOrientation() {
 }
 
 //Umgebungslicht
+//Im Firefox Mobile Browser ('about:config') muss device.sensors.ambientLight.enabled auf true gesetzt werden
 
 function startListeningToDeviceLight() {
     window.addEventListener('devicelight', lightHandler);
@@ -81,4 +90,25 @@ function writeLightToDocument() {
 
 function stopListeningToDeviceLight() {
     window.removeEventListener('devicelight', lightHandler);
+}
+
+//Geolocation
+
+function startListeningToGeolocation() {
+    geolocationWatchId = navigator.geolocation.watchPosition(handleLocation);
+}
+
+function getGeolocation(location) {
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
+}
+
+function writeGeolocationToDocument() {
+    document.getElementById("latitude").innerHTML = latitude;
+    document.getElementById("longitude").innerHTML = longitude;
+}
+
+
+function stopListeningToGeolocation() {
+    navigator.geolocation.clearWatch(geolocationWatchId);
 }
