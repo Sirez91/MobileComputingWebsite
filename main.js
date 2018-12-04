@@ -4,6 +4,7 @@ var zAcceleration;
 var xOrientattion;
 var yOrientattion;
 var zOrientattion;
+var lumen;
 
 const motionHandler =  function(event) {
     getAcceleration(event);
@@ -13,8 +14,14 @@ const motionHandler =  function(event) {
 const orientationHandler = function(event) {
     getOrienttion(event);
     writeOrientationToDocument();
+};
 
-}
+const lightHandler = function(event) {
+    getLight(event);
+    writeLightToDocument();
+};
+
+//Beschleunigung
 
 function startListeningToDeviceMotion() {
     window.addEventListener('devicemotion', motionHandler);
@@ -36,6 +43,8 @@ function stopListeningToDeviceMotion() {
     window.removeEventListener('devicemotion', motionHandler);
 }
 
+//Orientierung
+
 function startListeningToDeviceOrientation() {
     window.addEventListener('deviceorientation', orientationHandler);
 }
@@ -54,4 +63,22 @@ function writeOrientationToDocument() {
 
 function stopListeningToDeviceOrientation() {
     window.removeEventListener('deviceorientation', orientationHandler);
+}
+
+//Umgebungslicht
+
+function startListeningToDeviceLight() {
+    window.addEventListener('devicelight', lightHandler);
+}
+
+function getLight(event) {
+    lumen = event.value;
+}
+
+function writeLightToDocument() {
+    document.getElementById("lumen").innerHTML = lumen;
+}
+
+function stopListeningToDeviceLight() {
+    window.removeEventListener('devicelight', lightHandler);
 }
