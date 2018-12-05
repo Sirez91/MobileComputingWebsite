@@ -144,7 +144,7 @@ function startListeningToDeviceProximity() {
 }
 
 function getProximity(event) {
-    proximity = event.value + " min: " + event.min + "max: " + event.max;
+    proximity = String(event.value) + " min: " + String(event.min) + "max: " + String(event.max);
 }
 
 function writeProximityToDocument() {
