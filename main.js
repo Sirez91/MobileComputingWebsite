@@ -12,7 +12,7 @@ var requestedBluetoothDevice;
 var proximity;
 
 const proximityHandler = function(event) {
-    getProxbe129687df0ae4c57ad035620048666525aedce2imity(event);
+    getProximity(event);
     writeProximityToDocument();
 }
 
