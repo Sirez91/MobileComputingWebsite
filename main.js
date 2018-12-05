@@ -118,10 +118,7 @@ function stopListeningToGeolocation() {
 
 function requestBluetoothDevice() {
     navigator.bluetooth.requestDevice({
-        filters: [
-            {name: "Bambi"},
-            {name: "OnePlus 5T"}
-    ]
+        acceptAllDevices:true
       }).then(device => {
           requestedBluetoothDevice = device.name;
     })
