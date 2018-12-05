@@ -8,6 +8,7 @@ var lumen;
 var latitude;
 var longitude;
 var geolocationWatchId;
+var requestedBluetoothDevice;
 
 const handleLocation = function(location) {
     getGeolocation(location);
@@ -112,3 +113,15 @@ function writeGeolocationToDocument() {
 function stopListeningToGeolocation() {
     navigator.geolocation.clearWatch(geolocationWatchId);
 }
+
+//Bluetooth
+
+function requestBluetoothDevice() {
+    requestedBluetoothDevice = navigator.bluetooth.requestDevice;
+    writeRequestedBluetoothDeviceToDocument();
+}
+
+function writeRequestedBluetoothDeviceToDocument() {
+    document.getElementById("requestedBluetoothDevice").innerHTML = requestedBluetoothDevice;
+}
+

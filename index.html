@@ -67,8 +67,18 @@
       <h1>Geolocation auslesen</h1>
       <button onclick="startListeningToGeolocation()">Auslesen starten</button>
       <button onclick="stopListeningToGeolocation()">Auslesen stoppen</button>
-      <p>Breitengrad: <span id="latitude"></span></p>
-      <p>Längengrad: <span id="longitude"></span></p>
+      <p>
+        Breitengrad: <span id="latitude"></span><br />
+        Längengrad: <span id="longitude"></span>
+      </p>
+    </div>
+
+    <div>
+      <h1>BluetoothDevice auswählen</h1>
+      <button onclick="requestBluetoothDevice()">Device auswählen</button>
+      <p>
+        BluetoothDevice: <span id="requestedBluetoothDevice"></span><br />
+      </p>
     </div>
   </body>
 </html>
