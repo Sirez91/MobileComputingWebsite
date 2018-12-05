@@ -9,6 +9,12 @@ var latitude;
 var longitude;
 var geolocationWatchId;
 var requestedBluetoothDevice;
+var proximity;
+
+const proximityHandler = function(event) {
+    getProximity(event);
+    writeProximityToDocument();
+}
 
 const handleLocation = function(location) {
     getGeolocation(location);
@@ -131,3 +137,20 @@ function writeRequestedBluetoothDeviceToDocument() {
     document.getElementById("requestedBluetoothDevice").innerHTML = requestedBluetoothDevice;
 }
 
+// Proximity
+
+function startListeningToDeviceProximity() {
+    window.addEventListener('deviceproximity', proximityHandler);
+}
+
+function getProximity(event) {
+    proximity = event.value;
+}
+
+function writeProximityToDocument() {
+    document.getElementById("proximity").innerHTML = proximity;
+}
+
+function stopListeningToDeviceProximity() {
+    window.removeEventListener('deviceproximity', proximityHandler);
+}

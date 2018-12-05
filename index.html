@@ -76,9 +76,14 @@
     <div>
       <h1>BluetoothDevice auswählen</h1>
       <button onclick="requestBluetoothDevice()">Device auswählen</button>
-      <p>
-        BluetoothDevice: <span id="requestedBluetoothDevice"></span><br />
-      </p>
+      <p>BluetoothDevice: <span id="requestedBluetoothDevice"></span><br /></p>
+    </div>
+
+    <div>
+      <h1>Proximity auslesen</h1>
+      <button onclick="startListeningToDeviceProximity()">Auslesen starten</button>
+      <button onclick="stopListeningToDeviceProximity()">Auslesen stoppen</button>
+      <p>Proximity: <span id="proximity"></span></p>
     </div>
   </body>
 </html>
