@@ -117,9 +117,11 @@ function stopListeningToGeolocation() {
 //Bluetooth
 
 function requestBluetoothDevice() {
-    requestedBluetoothDevice = navigator.bluetooth.requestDevice({
+    navigator.bluetooth.requestDevice({
         acceptAllDevices:true
-      });
+      }).then(device => {requestBluetoothDevice = device.name })
+      .catch(error => { requestedBluetoothDevice = "Error: " + error; });
+    
     writeRequestedBluetoothDeviceToDocument();
 }
 
