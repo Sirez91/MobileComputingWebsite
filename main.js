@@ -137,16 +137,14 @@ function writeRequestedBluetoothDeviceToDocument() {
     document.getElementById("requestedBluetoothDevice").innerHTML = requestedBluetoothDevice;
 }
 
-// Proximity
+// Proximity minvalue = 0, maxvalue = 8. Nothing in between is putted out
 
 function startListeningToDeviceProximity() {
     window.addEventListener('deviceproximity', proximityHandler);
 }
 
 function getProximity(event) {
-    proximity = event.value;
-    window.alert(event.min);
-    window.alert(event.max);    
+    proximity = event.value;  
 }
 
 function writeProximityToDocument() {
