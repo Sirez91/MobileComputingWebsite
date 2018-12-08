@@ -194,16 +194,18 @@ function drawEnemies() {
 }
 
 function startListeningToDeviceOrientation() {
+    alert("funktioniert1");
     window.addEventListener('deviceorientation', orientationHandler);
 }
 
 const orientationHandler = function (event) {
+    alert("funktioniert2");
     getOrienttion(event);
 };
 
 function getOrienttion(event) {
     var horizontalOrientation = event.gamma;
-    alert("funktioniert");
+    alert("funktioniert3");
     if (horizontalOrientation > 5) {
         direction = 1;
     } else if (horizontalOrientation < 5) {
