@@ -203,6 +203,7 @@ const orientationHandler = function (event) {
 
 function getOrienttion(event) {
     var horizontalOrientation = event.gamma;
+    alert("funktioniert");
     if (horizontalOrientation > 5) {
         direction = 1;
     } else if (horizontalOrientation < 5) {
