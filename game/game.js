@@ -1,17 +1,29 @@
-const fps = 30;
+const fps = 60;
 var count = 0;
 var fullscreenElement;
 var gameCanvas;
 var gameCanvasContext;
 var playerX = 20;
 var playerY = 50;
-var playerSpeed = 20;
+var playerSpeed = 5;
 var actualPlayerSpeed;
 var direction = 0;
 var playerWidth = 50;
 var playerHeight = 50;
+var enemies = [];
+var enemyWidth = 50;
+var enemyHeight = 50;
+var gameSpeed = 10;
+var hitsElement;
+var hits = 0;
+var newEnemy = 0;
 
 const manageGame = function () {
+    if (newEnemy > 50) {
+        enemies.push(createEnemy());
+        newEnemy = 0;
+    }
+    newEnemy++;
     drawBackground();
     move();
     drawMovingObjects();
@@ -29,7 +41,8 @@ window.onload = function () {
     }
     fullscreenElement = document.getElementById("gameCanvas");
     gameCanvas = document.getElementById("gameCanvas");
-    //window.onresize = exitFullscreen;
+    hitsElement = document.getElementById("hits");
+    hitsElement.innerHTML = hits;
     gameCanvasContext = gameCanvas.getContext("2d");
     gameCanvas.width = window.innerWidth / 2;
     gameCanvas.height = window.innerHeight / 2;
@@ -80,19 +93,19 @@ function exitFullscreen() {
 }
 
 function drawBackground() {
-    gameCanvasContext.fillStyle = "yellow";
+    gameCanvasContext.fillStyle = "black";
     gameCanvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight);
-    document.getElementById("text").innerHTML = window.innerWidth;
 }
 
 function move() {
     movePlayer();
+    moveEnemies();
 }
 
 function movePlayer() {
     playerY = playerY + actualPlayerSpeed * direction;
     if (playerY > gameCanvas.height - playerHeight) {
-        playerY = gameCanvas.height-playerHeight;
+        playerY = gameCanvas.height - playerHeight;
     }
     if (playerY < 0) {
         playerY = 0;
@@ -101,9 +114,15 @@ function movePlayer() {
 
 function drawMovingObjects() {
     drawPlayerObject(playerX, playerY, playerWidth, playerHeight);
+    drawEnemies();
 }
 
 function drawPlayerObject(x, y, width, height) {
+    gameCanvasContext.fillStyle = "white";
+    gameCanvasContext.fillRect(x, y, width, height);
+}
+
+function drawEnemyObject(x, y, width, height) {
     gameCanvasContext.fillStyle = "white";
     gameCanvasContext.fillRect(x, y, width, height);
 }
@@ -132,4 +151,41 @@ function onFullScreenChange() {
     if (!fullScreenElement) {
         exitFullscreen();
     }
+}
+
+
+function createEnemy() {
+    var enemy = [];
+    enemy.push(gameCanvas.width);
+    enemy.push((Math.random() * (gameCanvas.height - enemyHeight)));
+    enemy.push(enemyWidth);
+    enemy.push(enemyHeight);
+    return enemy;
+}
+
+function moveEnemies() {
+    var count = 0;
+    enemies.forEach(function (enemy) {
+        if (enemy[0] > 0) {
+            enemy[0] = enemy[0] - gameSpeed;
+        } else {
+            enemies[count] = {};
+        }
+        count++;
+
+    })
+}
+
+function drawEnemies() {
+    count = 0;
+    enemies.forEach(function (enemy) {
+        drawEnemyObject(enemy[0], enemy[1], enemy[2], enemy[3]);
+        if (enemy[0] < playerX + playerWidth && playerY - enemyHeight < enemy[1] && enemy[1] < playerY + playerHeight) {
+            //alert("enemy x: " + enemy[0] + " player x: " + playerX + " enemy y: " + enemy[1] + " player y :" + playerY);
+            hits++;
+            hitsElement.innerHTML = hits;
+            enemies[count] = {};
+        }
+        count++;
+    })
 }
