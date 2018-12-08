@@ -17,6 +17,7 @@ var gameSpeed = 10;
 var hitsElement;
 var hits = 0;
 var newEnemy = 0;
+var horizontalOrientation;
 
 const manageGame = function () {
     if (newEnemy > 50) {
@@ -32,12 +33,14 @@ const manageGame = function () {
 //wird beim Start ausgeführt
 window.onload = function () {
 
+    startListeningToDeviceOrientation();
+
     actualPlayerSpeed = playerSpeed;
     setOnFullScreenChange();
 
     window.onkeydown = checkKey;
     window.onkeyup = function () {
-        actualPlayerSpeed = 0;
+        direction = 0;
     }
     fullscreenElement = document.getElementById("gameCanvas");
     gameCanvas = document.getElementById("gameCanvas");
@@ -188,4 +191,23 @@ function drawEnemies() {
         }
         count++;
     })
+}
+
+function startListeningToDeviceOrientation() {
+    window.addEventListener('deviceorientation', orientationHandler);
+}
+
+const orientationHandler = function (event) {
+    getOrienttion(event);
+};
+
+function getOrienttion(event) {
+    var horizontalOrientation = event.gamma;
+    if (horizontalOrientation > 5) {
+        direction = 1;
+    } else if (horizontalOrientation < 5) {
+        direction = -1
+    } else {
+        direction = 0;
+    }
 }
