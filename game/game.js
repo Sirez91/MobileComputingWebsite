@@ -20,20 +20,33 @@ var newEnemy = 0;
 var horizontalOrientation;
 var spaceship;
 var planet;
+var start;
+var timeSinceStart;
+var highScore = 0;
+var barHeight = 20;
+var enemyProducingSpeed = 50;
+var currentEnemyProducingSpeed = enemyProducingSpeed;
 
 const manageGame = function () {
-    if (newEnemy > 50) {
+    if (newEnemy > currentEnemyProducingSpeed) {
         enemies.push(createEnemy());
         newEnemy = 0;
+        currentEnemyProducingSpeed = enemyProducingSpeed-(timeSinceStart/20);
     }
     newEnemy++;
     drawBackground();
     move();
     drawMovingObjects();
+    drawStatusBar();
 }
 
 //wird beim Start ausgeführt
 window.onload = function () {
+
+    start = Date.now();
+    setInterval(function () {
+        timeSinceStart = Math.floor((Date.now() - start) / 1000);
+    }, 1);
 
     spaceship = new Image();
     spaceship.src = '../ressources/images/spaceship_20x10px.png';
@@ -117,8 +130,8 @@ function movePlayer() {
     if (playerY > gameCanvas.height - playerHeight) {
         playerY = gameCanvas.height - playerHeight;
     }
-    if (playerY < 0) {
-        playerY = 0;
+    if (playerY < barHeight) {
+        playerY = barHeight;
     }
 }
 
@@ -169,7 +182,7 @@ function onFullScreenChange() {
 function createEnemy() {
     var enemy = [];
     enemy.push(gameCanvas.width);
-    enemy.push((Math.random() * (gameCanvas.height - enemyHeight)));
+    enemy.push((Math.random() * (gameCanvas.height - enemyHeight - barHeight))+barHeight);
     enemy.push(enemyWidth);
     enemy.push(enemyHeight);
     return enemy;
@@ -203,7 +216,11 @@ function collisionDetected(enemyId) {
     hits++;
     hitsElement.innerHTML = hits;
     window.navigator.vibrate(300);
-    enemies[enemyId] = {};
+    if (timeSinceStart > highScore) {
+        highScore = timeSinceStart;
+    }
+    start = Date.now();
+    enemies = [];
 }
 
 function startListeningToDeviceOrientation() {
@@ -223,4 +240,15 @@ function getOrienttion(event) {
     } else {
         direction = 0;
     }
+}
+
+function drawStatusBar() {
+    gameCanvasContext.fillStyle = "black";
+    gameCanvasContext.fillRect(0, 0, gameCanvas.width, barHeight);
+    gameCanvasContext.fillStyle = "white";
+    gameCanvasContext.font = "10px Arial";
+    gameCanvasContext.fillText("Round " + hits, 20, 15);
+    gameCanvasContext.fillText("Time: " + timeSinceStart, gameCanvas.width - 50, 15);
+    gameCanvasContext.fillText("Highscore: " + highScore, gameCanvas.width / 2 - 50, 15);
+
 }
