@@ -193,13 +193,17 @@ function drawEnemies() {
     enemies.forEach(function (enemy) {
         drawEnemyObject(enemy[0], enemy[1], enemy[2], enemy[3]);
         if (enemy[0] < playerX + playerWidth && playerY - enemyHeight < enemy[1] && enemy[1] < playerY + playerHeight) {
-            //alert("enemy x: " + enemy[0] + " player x: " + playerX + " enemy y: " + enemy[1] + " player y :" + playerY);
-            hits++;
-            hitsElement.innerHTML = hits;
-            enemies[count] = {};
+            collisionDetected(count);
         }
         count++;
     })
+}
+
+function collisionDetected(enemyId) {
+    hits++;
+    hitsElement.innerHTML = hits;
+    window.navigator.vibrate(300);
+    enemies[enemyId] = {};
 }
 
 function startListeningToDeviceOrientation() {
