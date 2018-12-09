@@ -26,18 +26,26 @@ var highScore = 0;
 var barHeight = 20;
 var enemyProducingSpeed = 50;
 var currentEnemyProducingSpeed = enemyProducingSpeed;
+var paused = false;
 
 const manageGame = function () {
-    if (newEnemy > currentEnemyProducingSpeed) {
-        enemies.push(createEnemy());
-        newEnemy = 0;
-        currentEnemyProducingSpeed = enemyProducingSpeed-(timeSinceStart/20);
+    if (!paused) {
+        if (newEnemy > currentEnemyProducingSpeed) {
+            enemies.push(createEnemy());
+            newEnemy = 0;
+            currentEnemyProducingSpeed = enemyProducingSpeed - (timeSinceStart / 20);
+        }
+        newEnemy++;
+        drawBackground();
+        move();
+        drawMovingObjects();
+        drawStatusBar();
+    } else {
+        gameCanvasContext.fillStyle = "lightgrey";
+        gameCanvasContext.font = '100px Arial';
+        gameCanvasContext.fillText("PAUSED", 150, gameCanvas.height / 2 + 50);
     }
-    newEnemy++;
-    drawBackground();
-    move();
-    drawMovingObjects();
-    drawStatusBar();
+
 }
 
 //wird beim Start ausgeführt
@@ -70,7 +78,7 @@ window.onload = function () {
     gameCanvas.width = 720;
     gameCanvas.height = 400;
 
-    setInterval(manageGame, 1000 / fps);
+
 }
 
 function setOnFullScreenChange() {
@@ -86,6 +94,8 @@ function setOnFullScreenChange() {
 
 //Makes the "fullscreenElement" fill the whole screen
 function startFullscreen() {
+
+    paused = false;
 
     if (fullscreenElement.requestFullscreen) {
         fullscreenElement.requestFullscreen();
@@ -105,17 +115,13 @@ function startFullscreen() {
         //gameCanvas.height = window.innerHeight;
     }
     screen.orientation.lock("landscape-primary");
+    setInterval(manageGame, 1000 / fps);
 }
 
 
 
 function exitFullscreen() {
-    /*
-    if (gameCanvas.width == window.innerWidth) {
-        gameCanvas.width = window.innerWidth / 2;
-        gameCanvas.height = window.innerHeight / 2;
-    }
-    */
+    paused = true;
 }
 
 function drawBackground() {
@@ -185,7 +191,7 @@ function onFullScreenChange() {
 function createEnemy() {
     var enemy = [];
     enemy.push(gameCanvas.width);
-    enemy.push((Math.random() * (gameCanvas.height - enemyHeight - barHeight))+barHeight);
+    enemy.push((Math.random() * (gameCanvas.height - enemyHeight - barHeight)) + barHeight);
     enemy.push(enemyWidth);
     enemy.push(enemyHeight);
     return enemy;
@@ -249,7 +255,7 @@ function drawStatusBar() {
     gameCanvasContext.fillStyle = "black";
     gameCanvasContext.fillRect(0, 0, gameCanvas.width, barHeight);
     gameCanvasContext.fillStyle = "white";
-    gameCanvasContext.font = "10px Arial";
+    gameCanvasContext.font = "10pt Arial";
     gameCanvasContext.fillText("Round " + hits, 20, 15);
     gameCanvasContext.fillText("Time: " + timeSinceStart, gameCanvas.width - 50, 15);
     gameCanvasContext.fillText("Highscore: " + highScore, gameCanvas.width / 2 - 50, 15);
