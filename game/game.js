@@ -11,8 +11,8 @@ var direction = 0;
 var playerWidth = 50;
 var playerHeight = 25;
 var enemies = [];
-var enemyWidth = 50;
-var enemyHeight = 50;
+var enemyWidth = 40;
+var enemyHeight = 40;
 var gameSpeed = 10;
 var hitsElement;
 var hits = 0;
@@ -71,8 +71,8 @@ window.onload = function () {
     hitsElement = document.getElementById("hits");
     hitsElement.innerHTML = hits;
     gameCanvasContext = gameCanvas.getContext("2d");
-    gameCanvas.width = window.innerWidth / 2;
-    gameCanvas.height = window.innerHeight / 2;
+    gameCanvas.width = 720;
+    gameCanvas.height = 400;
 
     setInterval(manageGame, 1000 / fps);
 }
@@ -93,35 +93,37 @@ function startFullscreen() {
 
     if (fullscreenElement.requestFullscreen) {
         fullscreenElement.requestFullscreen();
-        gameCanvas.width = window.innerWidth;
-        gameCanvas.height = window.innerHeight;
+        //gameCanvas.width = window.innerWidth;
+        //gameCanvas.height = window.innerHeight;
     } else if (fullscreenElement.mozRequestFullScreen) { /* Firefox */
         fullscreenElement.mozRequestFullScreen();
-        gameCanvas.width = window.innerWidth;
-        gameCanvas.height = window.innerHeight;
+        //gameCanvas.width = window.innerWidth;
+        //gameCanvas.height = window.innerHeight;
     } else if (fullscreenElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
         fullscreenElement.webkitRequestFullscreen();
-        gameCanvas.width = window.innerWidth;
-        gameCanvas.height = window.innerHeight;
+        //gameCanvas.width = window.innerWidth;
+        //gameCanvas.height = window.innerHeight;
     } else if (fullscreenElement.msRequestFullscreen) { /* IE/Edge */
         fullscreenElement.msRequestFullscreen();
-        gameCanvas.width = window.innerWidth;
-        gameCanvas.height = window.innerHeight;
+        //gameCanvas.width = window.innerWidth;
+        //gameCanvas.height = window.innerHeight;
     }
 }
 
 
 
 function exitFullscreen() {
+    /*
     if (gameCanvas.width == window.innerWidth) {
         gameCanvas.width = window.innerWidth / 2;
         gameCanvas.height = window.innerHeight / 2;
     }
+    */
 }
 
 function drawBackground() {
     gameCanvasContext.fillStyle = "grey";
-    gameCanvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    gameCanvasContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 }
 
 function move() {
