@@ -104,9 +104,7 @@ function startFullscreen() {
         //gameCanvas.width = window.innerWidth;
         //gameCanvas.height = window.innerHeight;
     }
-    screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation
-
-    screen.lockOrientationUniversal("landscape-primary");
+    screen.orientation.lock("landscape-primary");
 }
 
 
