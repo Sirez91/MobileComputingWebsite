@@ -43,6 +43,10 @@ const manageGame = function () {
 //wird beim Start ausgeführt
 window.onload = function () {
 
+    screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation
+
+    screen.lockOrientationUniversal("landscape-primary");
+
     start = Date.now();
     setInterval(function () {
         timeSinceStart = Math.floor((Date.now() - start) / 1000);
