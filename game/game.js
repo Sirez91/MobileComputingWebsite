@@ -9,7 +9,7 @@ var playerSpeed = 5;
 var actualPlayerSpeed;
 var direction = 0;
 var playerWidth = 50;
-var playerHeight = 50;
+var playerHeight = 25;
 var enemies = [];
 var enemyWidth = 50;
 var enemyHeight = 50;
@@ -18,6 +18,8 @@ var hitsElement;
 var hits = 0;
 var newEnemy = 0;
 var horizontalOrientation;
+var spaceship;
+var planet;
 
 const manageGame = function () {
     if (newEnemy > 50) {
@@ -32,6 +34,11 @@ const manageGame = function () {
 
 //wird beim Start ausgeführt
 window.onload = function () {
+
+    spaceship = new Image();
+    spaceship.src = '../ressources/images/spaceship_20x10px.png';
+    planet = new Image();
+    planet.src = '../ressources/images/planet20px.png';
 
     startListeningToDeviceOrientation();
 
@@ -96,7 +103,7 @@ function exitFullscreen() {
 }
 
 function drawBackground() {
-    gameCanvasContext.fillStyle = "black";
+    gameCanvasContext.fillStyle = "grey";
     gameCanvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight);
 }
 
@@ -121,13 +128,15 @@ function drawMovingObjects() {
 }
 
 function drawPlayerObject(x, y, width, height) {
-    gameCanvasContext.fillStyle = "white";
-    gameCanvasContext.fillRect(x, y, width, height);
+    gameCanvasContext.drawImage(spaceship, x, y, width, height);
+    //gameCanvasContext.fillStyle = "white";
+    //gameCanvasContext.fillRect(x, y, width, height);
 }
 
 function drawEnemyObject(x, y, width, height) {
-    gameCanvasContext.fillStyle = "white";
-    gameCanvasContext.fillRect(x, y, width, height);
+    gameCanvasContext.drawImage(planet, x, y, width, height);
+    //gameCanvasContext.fillStyle = "white";
+    //gameCanvasContext.fillRect(x, y, width, height);
 }
 
 function checkKey(e) {
