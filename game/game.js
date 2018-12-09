@@ -33,7 +33,7 @@ const manageGame = function () {
         if (newEnemy > currentEnemyProducingSpeed) {
             enemies.push(createEnemy());
             newEnemy = 0;
-            currentEnemyProducingSpeed = enemyProducingSpeed - (timeSinceStart / 20);
+            currentEnemyProducingSpeed = enemyProducingSpeed - (timeSinceStart / 2);
         }
         newEnemy++;
         drawBackground();
