@@ -10,6 +10,7 @@
         crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" media="screen" href="../main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="game.css" />
+    <link href="../ressources/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -21,19 +22,91 @@
 </head>
 
 <body>
-    <div>
-        <h1>Game</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Rocket Ride</h1>
+                <p>Steuere die mit Lichtgeschwindigkeit fliegende Rackete durch entgegenkommende Planeten. 
+                Dein Ziel ist es so lange wie möglich den immer häufiger auftauchenden Planeten auszuweichen um 
+                so weit in den Weltraum vorzudringen wie noch niemand vor dir. <br>
+                <br>
+                Auf ins Abenteuer!
+                </p>
+                <div>
+                    <button type="button" class="btn btn-primary" onclick="startFullscreen()">Start Game</button>
+                </div>
 
-        <p>Hits: <span id="hits"></span></p>
-
-        <div>
-            <button onclick="startFullscreen()">FULL SCREEEEEEEEEN</button>
+                <div>
+                    <canvas id="gameCanvas"></canvas>
+                </div>
+            </div>
         </div>
-
-        <div>
-            <canvas id="gameCanvas"></canvas>
+        <h2>Erklärung</h2>
+        <div class="row">
+                <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                        <div class="card-header">
+                        <center>
+                            <img src="../ressources/images/spaceship_20x10px.png" width="50px" height="25px" alt="Spaceship">
+                            <h1>Die Rakete</h1>
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Du steuerst die Rakete! Dein Ziel ist es so weit wie möglich zu kommen ohne mit einem Planeten zu kollidieren.</p>
+                    </div>             
+                </div>
+                <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                        <div class="card-header">
+                            <center>
+                                <img src="../ressources/images/herz_20px.png" width="25px" height="25px" alt="Herz">
+                                <h1>Bonusleben</h1>
+                            </center>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Sammele Bonusleben um die Kollision mit einem Planeten zu überleben.<p>
+                        </div>            
+                    </div>
+                    <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                            <div class="card-header">
+                                <center>
+                                    <img src="../ressources/images/planet20px.png" width="25px" height="25px" alt="Planet">
+                                    <h1>Planeten</h1>
+                                </center>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Kollisionen mit Planeten enden meist tödlich, du solltest sie falls möglich vermeiden.</p>
+                            </div>         
+                        </div>
+                        <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                <div class="card-header">
+                                    <center>
+                                        <img src="../ressources/images/gamepad.png" width="25px" height="25px" alt="Spaceship">
+                                        <h1>Steuerung</h1>
+                                    </center>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <h5 class="card-title">PC Steuerung</h5>
+                                        <p class="card-text">
+                                            Am PC steuerst du die Rakete mit den Pfeiltastten.<br>
+                                           <br>
+                                            Mit der <span class="oi oi-arrow-thick-top" aria-hidden="true"></span>-Taste bewegst du die Rakete nach oben.<br>
+                                            Mit der <span class="oi oi-arrow-thick-bottom" aria-hidden="true"></span>-Taste bewegst du die Rakete nach unten. 
+                                        </p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <h5 class="card-title">Mobile Steuerung</h5>
+                                        <p class="card-text">
+                                            Auf deinem mobilen Gerät steuerst du die Rakete durch die Ausrichtung des Geräts.<br>
+                                            <br>
+                                            Mit einer Neigung nach hinten bewegst du die Rakete nach oben.<br>
+                                            Mit einer Neigung nach vorne bewegst du die Raketen nach unten.
+                                        </p>
+                                    </li>
+                                </ul>                       
+                            </div>
+            </div>
         </div>
-    </div>
+    </div>    
 </body>
 
 </html>

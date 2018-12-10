@@ -1,5 +1,4 @@
 const fps = 60;
-var count = 0;
 var fullscreenElement;
 var gameCanvas;
 var gameCanvasContext;
@@ -14,14 +13,13 @@ var enemies = [];
 var enemyWidth = 40;
 var enemyHeight = 40;
 var gameSpeed = 10;
-var hitsElement;
-var hits = 0;
+var tries = 0;
 var newEnemy = 0;
 var horizontalOrientation;
 var spaceship;
 var planet;
 var heart;
-var start;
+var startTime;
 var timeSinceStart;
 var highScore = 0;
 var barHeight = 20;
@@ -36,7 +34,7 @@ var pauseTime = null;
 const manageGame = function() {
   if (!paused) {
     runGame();
-  } else {
+  } else if (pauseTime != null) {
     gameCanvasContext.fillStyle = "lightgrey";
     gameCanvasContext.font = "100px Arial";
     gameCanvasContext.fillText("PAUSED", 150, gameCanvas.height / 2 + 50);
@@ -47,7 +45,7 @@ const manageGame = function() {
 window.onload = function() {
   setValues();
   setInterval(function() {
-    timeSinceStart = Math.floor((Date.now() - start) / 1000);
+    timeSinceStart = Math.floor((Date.now() - startTime) / 1000);
   }, 1);
 
   loadImages();
@@ -90,15 +88,13 @@ function loadImages() {
 }
 
 function setValues() {
-  start = Date.now();
+  startTime = Date.now();
   actualPlayerSpeed = playerSpeed;
   fullscreenElement = document.getElementById("gameCanvas");
   gameCanvas = document.getElementById("gameCanvas");
-  hitsElement = document.getElementById("hits");
-  hitsElement.innerHTML = hits;
   gameCanvasContext = gameCanvas.getContext("2d");
-  gameCanvas.width = 720;
-  gameCanvas.height = 400;
+  gameCanvas.width = 0;
+  gameCanvas.height = 0;
   extraTiming = Math.floor(Math.random() * 60);
 }
 
@@ -115,11 +111,12 @@ function setOnFullScreenChange() {
 
 //Makes the "fullscreenElement" fill the whole screen
 function startFullscreen() {
-
+  gameCanvas.width = 720;
+  gameCanvas.height = 400;
   paused = false;
 
-  if(pauseTime!=null) {
-      start = start + (Date.now()-pauseTime);
+  if (pauseTime != null) {
+    startTime = startTime + (Date.now() - pauseTime);
   }
 
   if (fullscreenElement.requestFullscreen) {
@@ -140,6 +137,8 @@ function startFullscreen() {
 function exitFullscreen() {
   paused = true;
   pauseTime = Date.now();
+  gameCanvas.width = 0;
+  gameCanvas.height = 0;
 }
 
 function drawBackground() {
@@ -218,7 +217,7 @@ function checkKey(e) {
 }
 
 function onFullScreenChange() {
-  var fullScreenElement =
+  let fullScreenElement =
     document.fullscreenElement ||
     document.msFullscreenElement ||
     document.mozFullScreenElement ||
@@ -240,7 +239,7 @@ function createEnemy() {
 }
 
 function moveEnemies() {
-  var count = 0;
+  let count = 0;
   enemies.forEach(function(enemy) {
     if (enemy[0] > 0) {
       enemy[0] = enemy[0] - gameSpeed;
@@ -252,7 +251,7 @@ function moveEnemies() {
 }
 
 function drawEnemies() {
-  count = 0;
+  let count = 0;
   enemies.forEach(function(enemy) {
     drawEnemyObject(enemy[0], enemy[1], enemy[2], enemy[3]);
     if (
@@ -267,8 +266,7 @@ function drawEnemies() {
 }
 
 function collisionDetected(enemyId) {
-  hits++;
-  hitsElement.innerHTML = hits;
+  tries++;
   window.navigator.vibrate(300);
   if (extraLifes > 0) {
     extraLifes--;
@@ -277,7 +275,7 @@ function collisionDetected(enemyId) {
     if (timeSinceStart > highScore) {
       highScore = timeSinceStart;
     }
-    start = Date.now();
+    startTime = Date.now();
     enemies = [];
     extra = null;
     extraTiming = Math.floor(Math.random() * 60);
@@ -293,10 +291,10 @@ const orientationHandler = function(event) {
 };
 
 function getOrienttion(event) {
-  var horizontalOrientation = event.gamma;
-  if (horizontalOrientation > 3) {
+  let horizontalOrientation = event.gamma;
+  if (horizontalOrientation > 4) {
     direction = -1;
-  } else if (horizontalOrientation < -3) {
+  } else if (horizontalOrientation < -4) {
     direction = 1;
   } else {
     direction = 0;
@@ -308,7 +306,7 @@ function drawStatusBar() {
   gameCanvasContext.fillRect(0, 0, gameCanvas.width, barHeight);
   gameCanvasContext.fillStyle = "white";
   gameCanvasContext.font = "10pt Arial";
-  gameCanvasContext.fillText("Round " + hits, 20, 15);
+  gameCanvasContext.fillText("Tries " + tries, 20, 15);
   gameCanvasContext.fillText(
     "Time: " + timeSinceStart,
     gameCanvas.width - 50,
