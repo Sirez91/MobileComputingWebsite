@@ -1,0 +1,19 @@
+.card-header-icon {
+    font-size: 25px;
+}
+
+.card-body {
+    text-align: justify;
+}
+
+p {
+    text-align: justify;
+}
+
+.bg-light-dark {
+    background-color: rgb(167, 167, 167);
+}
+
+.jumbotron {
+    padding: 2rem; 
+}
