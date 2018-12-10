@@ -104,7 +104,7 @@ function stopListeningToDeviceLight() {
 //Geolocation
 
 function startListeningToGeolocation() {
-    geolocationWatchId = navigator.geolocation.watchPosition(handleLocation);
+    geolocationWatchId = navigator.geolocation.watchPosition(handleLocation, (error) => console.log(error), {enableHighAccuracy: true, timeout: 20000, maximumAge: 0, distanceFilter: 0});
 }
 
 function getGeolocation(location) {
