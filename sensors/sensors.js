@@ -10,6 +10,8 @@ var longitude;
 var geolocationWatchId;
 var requestedBluetoothDevice;
 var proximity;
+var timeOld=0;
+var speed;
 
 const proximityHandler = function (event) {
     getProximity(event);
@@ -106,6 +108,19 @@ function startListeningToGeolocation() {
 }
 
 function getGeolocation(location) {
+    var time = Date.now();
+    var R = 6378.137; // Radius of earth in KM
+    var dLat =  location.coords.latitude * Math.PI / 180 -  latitude * Math.PI / 180;
+    var dLon =  location.coords.longitude * Math.PI / 180 -  longitude * Math.PI / 180;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos( latitude * Math.PI / 180) * Math.cos( location.coords.latitude * Math.PI / 180) *
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c;
+    var meters = d * 1000;
+    speed = meters/((timeOld-time)/(1000*60*60));
+    timeOld = Date.now();
+
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
 }
@@ -113,6 +128,9 @@ function getGeolocation(location) {
 function writeGeolocationToDocument() {
     document.getElementById("latitude").innerHTML = latitude;
     document.getElementById("longitude").innerHTML = longitude;
+    document.getElementById("speed").innerHTML = speed;
+
+
 }
 
 
