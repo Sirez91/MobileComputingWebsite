@@ -118,7 +118,7 @@ function getGeolocation(location) {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
     var meters = d * 1000;
-    speed = meters/((timeOld-time)/(1000*60*60));
+    speed = (meters/1000)/((time-timeOld)/(1000*60*60));
     timeOld = Date.now();
 
     latitude = location.coords.latitude;
