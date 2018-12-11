@@ -430,9 +430,10 @@ function stopListeningToDeviceMotion() {
 }
 
 const motionHandler = function(event) {
-  x = event.acceleration.x;
-  y = event.acceleration.y;
-  z = event.acceleration.z;
+  x = Math.abs(event.acceleration.x);
+  y = Math.abs(event.acceleration.y);
+  z = Math.abs(event.acceleration.z);
+
   if(x > 6 || y > 6 || z > 6) {
     if (paused == true) {
       if (pauseTime == null) {
