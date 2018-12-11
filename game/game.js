@@ -123,6 +123,7 @@ function setOnFullScreenChange() {
 
 //Makes the "fullscreenElement" fill the whole screen
 function startFullscreen() {
+  startListeningToDeviceMotion();
   gameCanvas.width = 720;
   gameCanvas.height = 400;
 
@@ -150,6 +151,7 @@ function exitFullscreen() {
   pauseTime = Date.now();
   gameCanvas.width = 0;
   gameCanvas.height = 0;
+  stopListeningToDeviceMotion();
 }
 
 function drawBackground() {
@@ -418,3 +420,28 @@ function drawGameStart() {
   gameCanvasContext.fillText("BEREIT?", 150, gameCanvas.height / 2);
   drawActionToPlay();
 }
+
+function startListeningToDeviceMotion() {
+  window.addEventListener("devicemotion", motionHandler);
+}
+
+function stopListeningToDeviceMotion() {
+  window.removeEventListener("devicemotion", motionHandler);
+}
+
+const motionHandler = function(event) {
+  if(x > 6 || y > 6 || z > 6) {
+    if (paused == true) {
+      if (pauseTime == null) {
+        startTime = Date.now();
+      } else {
+        startTime = startTime + (Date.now() - pauseTime);
+      }
+      pauseTime = null;
+      paused = false;
+    } else {
+      pauseTime = Date.now();
+      paused = true;
+    }
+  }
+};
