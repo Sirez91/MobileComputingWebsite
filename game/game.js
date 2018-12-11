@@ -34,15 +34,27 @@ var pauseTime = null;
 const manageGame = function() {
   if (!paused) {
     runGame();
-  } else if (pauseTime != null) {
-    gameCanvasContext.fillStyle = "lightgrey";
-    gameCanvasContext.font = "100px Arial";
-    gameCanvasContext.fillText("PAUSED", 150, gameCanvas.height / 2 + 50);
+  } else { 
+    if(enemies != []) {
+      if(pauseTime!=null) {
+        drawGamePaused();
+      }
+    }    
   }
 };
 
 //wird beim Start ausgeführt
 window.onload = function() {
+  jQuery(document).ready(function() {
+    /*
+        Navigation
+    */
+    $("a.scroll-link").on("click", function(e) {
+      e.preventDefault();
+      scroll_to($(this), $("nav").outerHeight());
+    });
+  });
+
   setValues();
   setInterval(function() {
     timeSinceStart = Math.floor((Date.now() - startTime) / 1000);
@@ -74,8 +86,8 @@ function runGame() {
 
 function drawEverything() {
   drawBackground();
-  drawMovingObjects();
   drawStatusBar();
+  drawMovingObjects();
 }
 
 function loadImages() {
@@ -113,10 +125,9 @@ function setOnFullScreenChange() {
 function startFullscreen() {
   gameCanvas.width = 720;
   gameCanvas.height = 400;
-  paused = false;
 
-  if (pauseTime != null) {
-    startTime = startTime + (Date.now() - pauseTime);
+  if(pauseTime==null) {
+    drawGameStart();
   }
 
   if (fullscreenElement.requestFullscreen) {
@@ -175,8 +186,8 @@ function movePlayer() {
 
 function drawMovingObjects() {
   drawPlayerObject(playerX, playerY, playerWidth, playerHeight);
-  drawEnemies();
   drawExtra();
+  drawEnemies();
 }
 
 function drawExtra() {
@@ -192,7 +203,13 @@ function drawExtra() {
       extraTiming = extraTiming + Math.floor(Math.random() * 60);
     }
   } else if (timeSinceStart > extraTiming) {
-    extra = [gameCanvas.width, Math.floor(Math.random() * gameCanvas.height)];
+    extra = [
+      gameCanvas.width,
+      Math.floor(
+        Math.random() * (gameCanvas.height - enemyHeight - barHeight) +
+          barHeight
+      )
+    ];
   }
 }
 
@@ -213,6 +230,19 @@ function checkKey(e) {
   } else if (e.keyCode == "40") {
     actualPlayerSpeed = playerSpeed;
     direction = 1;
+  } else if (e.keyCode == "18") {
+    if (paused == true) {
+      if (pauseTime == null) {
+        startTime = Date.now();
+      } else {
+        startTime = startTime + (Date.now() - pauseTime);
+      }
+      pauseTime = null;
+      paused = false;
+    } else {
+      pauseTime = Date.now();
+      paused = true;
+    }
   }
 }
 
@@ -272,10 +302,8 @@ function collisionDetected(enemyId) {
     extraLifes--;
     enemies.splice(enemyId, 1);
   } else {
-    if (timeSinceStart > highScore) {
-      highScore = timeSinceStart;
-    }
-    startTime = Date.now();
+    drawGameOver();
+    paused = true;
     enemies = [];
     extra = null;
     extraTiming = Math.floor(Math.random() * 60);
@@ -309,7 +337,7 @@ function drawStatusBar() {
   gameCanvasContext.fillText("Tries " + tries, 20, 15);
   gameCanvasContext.fillText(
     "Time: " + timeSinceStart,
-    gameCanvas.width - 50,
+    gameCanvas.width - 70,
     15
   );
   gameCanvasContext.fillText(
@@ -323,4 +351,70 @@ function drawStatusBar() {
 
 function drawExtraLife(x, y, width, height) {
   gameCanvasContext.drawImage(heart, x, y, width, height);
+}
+
+function scroll_to(clicked_link, nav_height) {
+  var element_class = clicked_link.attr("href");
+  var scroll_to = 0;
+  if (element_class != ".game") {
+    scroll_to = $(element_class).offset().top - 100;
+  }
+  if ($(window).scrollTop() != scroll_to) {
+    $("html, body")
+      .stop()
+      .animate({ scrollTop: scroll_to }, 1000);
+  }
+}
+
+function drawGameOver() {
+  gameCanvasContext.fillStyle = "lightgrey";
+  gameCanvasContext.font = "100px Arial";
+  gameCanvasContext.fillText("GAME OVER", 50, gameCanvas.height / 2 - 50);
+  gameCanvasContext.font = "20px Arial";
+  gameCanvasContext.fillText(
+    timeSinceStart + " SEKUNDEN ÜBERLEBT",
+    250,
+    gameCanvas.height / 2
+  );
+  if (timeSinceStart > highScore) {
+    gameCanvasContext.font = "50px Arial";
+    gameCanvasContext.fillText(
+      "NEUER HIGHSCORE",
+      100,
+      gameCanvas.height / 2 + 75
+    );
+    highScore = timeSinceStart;
+  }
+  drawActionToPlay();
+}
+
+function drawGamePaused() {
+  gameCanvasContext.fillStyle = "lightgrey";
+  gameCanvasContext.font = "100px Arial";
+  gameCanvasContext.fillText("PAUSIERT", 120, gameCanvas.height / 2);
+  drawActionToPlay();
+}
+
+function drawActionToPlay() {
+  gameCanvasContext.font = "20px Arial";
+  if (horizontalOrientation != null) {
+    gameCanvasContext.fillText(
+      "Schütteln zum Spielen",
+      250,
+      gameCanvas.height / 2 + 150
+    );
+  } else {
+    gameCanvasContext.fillText(
+      "Drücke Alt zum Spielen",
+      250,
+      gameCanvas.height / 2 + 150
+    );
+  }
+}
+
+function drawGameStart() {
+  gameCanvasContext.fillStyle = "lightgrey";
+  gameCanvasContext.font = "100px Arial";
+  gameCanvasContext.fillText("BEREIT?", 150, gameCanvas.height / 2);
+  drawActionToPlay();
 }
