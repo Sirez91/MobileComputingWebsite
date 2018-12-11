@@ -30,6 +30,7 @@ var extra = null;
 var extraTiming;
 var extraLifes = 0;
 var pauseTime = null;
+var motionLock=0;
 
 const manageGame = function() {
   if (!paused) {
@@ -434,7 +435,10 @@ const motionHandler = function(event) {
   y = Math.abs(event.acceleration.y);
   z = Math.abs(event.acceleration.z);
 
-  if(x > 6 || y > 6 || z > 6) {
+  
+
+  if( (x > 6 || y > 6 || z > 6) && motionLock<Date.now() ) {
+    motionLock = Date.now()+1000;
     if (paused == true) {
       if (pauseTime == null) {
         startTime = Date.now();
