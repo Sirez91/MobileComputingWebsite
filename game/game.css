@@ -1,5 +1,12 @@
 .card-header-icon {
     font-size: 25px;
+    margin-bottom: 0.4rem;
+    height: 25px;
+    width: auto;
+}
+
+.lead {
+    font-weight: 400;
 }
 
 .card-body {
@@ -11,7 +18,7 @@ p {
 }
 
 .bg-light-dark {
-    background-color: rgb(167, 167, 167);
+    background-color: rgb(233, 232, 232);
 }
 
 .jumbotron {
@@ -20,4 +27,22 @@ p {
 
 .no-padding {
     padding: 0%;
+}
+
+.card-header {
+    background-color: rgb(233, 232, 232);
+}
+
+.card {
+    border-color: rgb(202, 200, 200);
+}
+
+.heading {
+    font-weight: 500;
+}
+
+.sub-heading {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
 }
