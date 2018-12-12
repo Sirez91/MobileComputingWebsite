@@ -52,3 +52,11 @@ body {
   padding-bottom: 70px;
   position: relative;
 }
+
+.card-col {
+  padding: 5px;
+}
+
+.card {
+  height: 100%;
+}

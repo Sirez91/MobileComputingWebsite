@@ -23,50 +23,51 @@
 <body data-spy="scroll" data-target="#navbar" data-offset="105">
     <div class="container">
 
-            <!-- Navigation -->
-            
-            <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Rocket Ride</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link scroll-link" href="#game">Spielen<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link scroll-link" href="#description">Beschreibung</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link scroll-link" href="#controls">Steuerung</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <!-- Navigation -->
+
+        <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Rocket Ride</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link scroll-link" href="#game">Spielen<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll-link" href="#description">Beschreibung</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link scroll-link" href="#controls">Steuerung</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
         <!-- Game Presentation -->
         <div class="row">
             <div class="jumbotron col-md-12 bg-light-dark text-center game">
-            <h1 id="game" class="display-4 light-padding heading">Rocket Ride</h1>
-            <p class="lead">Steuere die Rackete durch die Weiten des Weltraums.
-                Dein Ziel ist es so lange wie möglich den immer häufiger auftauchenden Objekten auszuweichen um
-                so weit in den Weltraum vorzudringen wie noch niemand vor dir. <br>
-            </p>
-            <hr class="my-4">
-            <p class="lead text-center">
-                Auf ins Abenteuer!
-            </p>
-            <div>
-                <button type="button" class="btn btn-primary btn-lg" onclick="startFullscreen()">Spiel starten</button>
-            </div>
+                <h1 id="game" class="display-4 light-padding heading">Rocket Ride</h1>
+                <p class="lead">Steuere die Rackete durch die Weiten des Weltraums.
+                    Dein Ziel ist es so lange wie möglich den immer häufiger auftauchenden Objekten auszuweichen um
+                    so weit in den Weltraum vorzudringen wie noch niemand vor dir. <br>
+                </p>
+                <hr class="my-4">
+                <p class="lead text-center">
+                    Auf ins Abenteuer!
+                </p>
+                <div>
+                    <button type="button" class="btn btn-primary btn-lg" onclick="startFullscreen()">Spiel starten</button>
+                </div>
 
-            <div>
-                <canvas id="gameCanvas"></canvas>
-            </div>
+                <div>
+                    <canvas id="gameCanvas"></canvas>
+                </div>
             </div>
         </div>
-        
+
         <!-- Description of game elements -->
         <div class="row">
             <div class="col-md-12">
@@ -74,43 +75,53 @@
             </div>
         </div>
         <div class="row">
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12 no-padding description">
-                <div class="card-header text-center">
-                    <img class="card-header-icon" src="../ressources/images/spaceship_20x10px.png" alt="Spaceship">
-                    <h2>Die Rakete</h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Du steuerst die Rakete! Dein Ziel ist es so weit wie möglich zu kommen, ohne
-                        mit einem Planeten zu kollidieren.</p>
-                </div>
-            </div>
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12 no-padding">
-                <div class="card-header text-center">
-                    <img class="card-header-icon" src="../ressources/images/herz_20px.png" alt="Herz">
-                    <h2>Bonusleben</h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Sammele Bonusleben um die Kollision mit einem Planeten zu überleben.<p>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 card-col">
+                <div class="card no-padding">
+                    <div class="card-header text-center">
+                        <img class="card-header-icon" src="../ressources/images/spaceship_20x10px.png" alt="Spaceship">
+                        <h2>Die Rakete</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Du steuerst die Rakete! Dein Ziel ist es so weit wie möglich zu kommen,
+                            ohne
+                            mit einem Planeten zu kollidieren.</p>
+                    </div>
                 </div>
             </div>
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12 no-padding">
-                <div class="card-header text-center">
-                    <img class="card-header-icon" src="../ressources/images/planet20px.png" alt="Planet">
-                    <h2>Planeten</h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Kollisionen mit Planeten enden meist tödlich, du solltest sie falls möglich
-                        vermeiden.</p>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 card-col">
+                <div class="card no-padding">
+                    <div class="card-header text-center">
+                        <img class="card-header-icon" src="../ressources/images/herz_20px.png" alt="Herz">
+                        <h2>Bonusleben</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Sammele Bonusleben um die Kollision mit einem Planeten zu überleben.</p>
+                    </div>
                 </div>
             </div>
-            <div class="card col-xl-3 col-lg-4 col-md-6 col-sm-12 no-padding">
-                <div class="card-header text-center">
-                    <img class="card-header-icon" src="../ressources/images/planet20px.png" alt="Planet">
-                    <h2>Gegner</h2>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 card-col">
+                <div class="card no-padding">
+                    <div class="card-header text-center">
+                        <img class="card-header-icon" src="../ressources/images/planet20px.png" alt="Planet">
+                        <h2>Planeten</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Kollisionen mit Planeten enden meist tödlich, du solltest sie falls
+                            möglich
+                            vermeiden.</p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">Hier kommt die Beschreibung eines weiteren Gegners hin, sobald dieser 
-                        implementiert wurde</p>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 card-col">
+                <div class="card no-padding">
+                    <div class="card-header text-center">
+                        <img class="card-header-icon" src="../ressources/images/planet20px.png" alt="Planet">
+                        <h2>Gegner</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Hier kommt die Beschreibung eines weiteren Gegners hin, sobald dieser
+                            implementiert wurde</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,35 +134,41 @@
             </div>
         </div>
         <div class="row">
-            <div class="card col-xl-6 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="card-header text-center">
-                    <span class="oi oi-tablet card-header-icon" aria-hidden="true"></span>
-                    <h2>Mobil</h2>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 card-col">
+                <div class="card no-padding">
+                    <div class="card-header text-center">
+                        <span class="oi oi-tablet card-header-icon" aria-hidden="true"></span>
+                        <h2>Mobil</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Auf deinem mobilen Gerät steuerst du die Rakete durch die Ausrichtung des Geräts.<br>
+                            <br>
+                            Mit einer Neigung nach hinten bewegst du die Rakete nach oben.<br>
+                            Mit einer Neigung nach vorne bewegst du die Raketen nach unten.
+                        </p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">
-                        Auf deinem mobilen Gerät steuerst du die Rakete durch die Ausrichtung des Geräts.<br>
-                        <br>
-                        Mit einer Neigung nach hinten bewegst du die Rakete nach oben.<br>
-                        Mit einer Neigung nach vorne bewegst du die Raketen nach unten.
-                    </p>
-                </div>
+
             </div>
-            <div class="card col-xl-6 col-lg-6 col-md-6 col-sm-12 no-padding">
-                <div class="card-header text-center">
-                    <span class="oi oi-monitor card-header-icon" aria-hidden="true"></span>
-                    <h2>PC</h2>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 card-col">
+                <div class="card no-padding">
+                    <div class="card-header text-center">
+                        <span class="oi oi-monitor card-header-icon" aria-hidden="true"></span>
+                        <h2>PC</h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Am PC steuerst du die Rakete mit den Pfeiltastten die sich auf deiner Tastatur befinden.<br>
+                            <br>
+                            Mit der <span class="oi oi-arrow-thick-top" aria-hidden="true"></span>-Taste bewegst du die
+                            Rakete nach oben.<br>
+                            Mit der <span class="oi oi-arrow-thick-bottom" aria-hidden="true"></span>-Taste bewegst du
+                            die Rakete nach unten.
+                        </p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">
-                        Am PC steuerst du die Rakete mit den Pfeiltastten die sich auf deiner Tastatur befinden.<br>
-                        <br>
-                        Mit der <span class="oi oi-arrow-thick-top" aria-hidden="true"></span>-Taste bewegst du die
-                        Rakete nach oben.<br>
-                        Mit der <span class="oi oi-arrow-thick-bottom" aria-hidden="true"></span>-Taste bewegst du
-                        die Rakete nach unten.
-                    </p>
-                </div>
+
             </div>
         </div>
     </div>
