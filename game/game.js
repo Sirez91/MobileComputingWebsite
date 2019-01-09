@@ -93,9 +93,9 @@ function drawEverything() {
 
 function loadImages() {
   spaceship = new Image();
-  spaceship.src = "../ressources/images/spaceship_20x10px.png";
+  spaceship.src = "../ressources/images/rakete.png";
   planet = new Image();
-  planet.src = "../ressources/images/planet20px.png";
+  planet.src = "../ressources/images/planet.png";
   heart = new Image();
   heart.src = "../ressources/images/herz_20px.png";
 }
