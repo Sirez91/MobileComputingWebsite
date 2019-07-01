@@ -6,7 +6,7 @@
 }
 
 .lead {
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .card-body {
@@ -39,6 +39,7 @@ p {
 
 .heading {
   font-weight: 500;
+  font-family: 'Alfa Slab One', cursive;
 }
 
 .sub-heading {
@@ -51,6 +52,7 @@ body {
   padding-top: 70px;
   padding-bottom: 70px;
   position: relative;
+  font-family: 'Oswald', sans-serif;
 }
 
 .card-col {
@@ -59,4 +61,8 @@ body {
 
 .card {
   height: 100%;
+}
+
+.navbar-brand {
+  font-family: 'Alfa Slab One', cursive;
 }
