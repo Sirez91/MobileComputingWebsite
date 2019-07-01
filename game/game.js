@@ -322,7 +322,7 @@ const orientationHandler = function(event) {
 };
 
 function getOrienttion(event) {
-  let horizontalOrientation = event.gamma;
+  horizontalOrientation = event.gamma;
   if (horizontalOrientation > 4) {
     direction = -1;
   } else if (horizontalOrientation < -4) {
