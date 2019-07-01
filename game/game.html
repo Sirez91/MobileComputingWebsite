@@ -12,8 +12,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="game.css" />
     <link href="../ressources/open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Roboto&display=swap" rel="stylesheet">
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -54,9 +53,9 @@
         <div class="row">
             <div class="jumbotron col-md-12 bg-light-dark text-center game">
                 <h1 id="game" class="display-4 light-padding heading">Rocket Ride</h1>
-                <p class="lead">Steuere die Rakete durch die Weiten des Weltraums.
-                    Dein Ziel ist es so lange wie möglich den immer häufiger auftauchenden Objekten auszuweichen um
-                    so weit in den Weltraum vorzudringen wie noch niemand vor dir. <br>
+                <p class="lead description">Steuere die Rakete durch die gefährlichen Weiten des Weltraums.
+                    Dein Ziel ist es so lange wie möglich den immer häufiger auftauchenden Planeten auszuweichen, um
+                    weiter in den Weltraum vorzudringen als jeder Mensch vor dir!<br>
                 </p>
                 <hr class="my-4">
                 <p class="lead text-center">
@@ -64,9 +63,6 @@
                 </p>
                 <div>
                     <button type="button" class="btn btn-primary btn-lg" onclick="startFullscreen()">Spiel starten</button>
-                </div>
-
-                <div>
                     <canvas id="gameCanvas"></canvas>
                 </div>
             </div>
