@@ -109,6 +109,12 @@ function setValues() {
   gameCanvas.width = 0;
   gameCanvas.height = 0;
   extraTiming = Math.floor(Math.random() * 60);
+
+  var hs = localStorage.getItem("Highscore");
+
+  if(hs != null && hs != NaN) {
+    highScore = hs;
+  }
 }
 
 function setOnFullScreenChange() {
@@ -387,6 +393,7 @@ function drawGameOver() {
       gameCanvas.height / 2 + 75
     );
     highScore = timeSinceStart;
+    localStorage.setItem("Highscore", highScore);
   }
   drawActionToPlay();
 }
