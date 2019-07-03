@@ -22,13 +22,13 @@ p {
 }
 
 .bg-light-dark {
-  background-color: rgb(233, 232, 232);
+  background-color: rgb(206, 206, 212);
 }
 
 .jumbotron {
   padding: 2rem;
   border: 1px solid rgba(0,0,0,.125);
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
 }
 
 .no-padding {
@@ -36,12 +36,13 @@ p {
 }
 
 .card-header {
-  background-color: rgb(233, 232, 232);
+  background-color: rgb(206, 206, 212);
 }
 
 .card {
-  border-color: rgb(202, 200, 200);
-  box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+  height: 100%;
+  border-color: rgb(180, 180, 186);
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
 }
 
 .heading {
@@ -52,22 +53,18 @@ p {
 .sub-heading {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  font-weight: 500;
+  font-weight: 800;
 }
 
 body {
   padding-top: 70px;
-  padding-bottom: 70px;
+  padding-bottom: 0px;
   position: relative;
   font-family: 'Roboto', sans-serif;
 }
 
 .card-col {
   padding: 5px;
-}
-
-.card {
-  height: 100%;
 }
 
 .navbar {
@@ -79,5 +76,35 @@ body {
 }
 
 .btn-lg {
-  box-shadow: 0px 8px 15px rgb(99, 95, 95);
+  box-shadow: 0px 4px 8px rgb(99, 95, 95);
+}
+
+a:visited {
+  color: rgb(180, 180, 180) !important;
+}
+
+a:active {
+  color: rgb(255, 255, 255) !important;
+}
+
+a {
+  color: rgb(230, 230, 230) !important;
+}
+
+.mt-6 {
+  margin-top: 10rem;
+}
+
+.bg-footer-primary {
+  background-color: #525c66;
+}
+
+.bg-footer-secondary {
+ /* background-color: #212529; */
+  background-color: #212529;
+  color: #525c66;
+}
+
+.lighter-text {
+  color: rgb(180, 180, 180);
 }
