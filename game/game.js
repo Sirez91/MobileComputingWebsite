@@ -31,6 +31,10 @@ var extraTiming;
 var extraLifes = 0;
 var pauseTime = null;
 var motionLock=0;
+var gameOver = false;
+var num = 1;
+var exploY = 50;
+var timeGameOver = 0;
 
 const manageGame = function() {
   if (!paused) {
@@ -194,9 +198,26 @@ function movePlayer() {
 }
 
 function drawMovingObjects() {
-  drawPlayerObject(playerX, playerY, playerWidth, playerHeight);
-  drawExtra();
-  drawEnemies();
+  if(!gameOver) {
+    drawPlayerObject(playerX, playerY, playerWidth, playerHeight);
+    drawExtra();
+    drawEnemies();
+  } else {
+    if(num<70) {
+      drawExplosion();
+    } else {
+      drawGameOver();
+      resetGame();
+    }
+  }
+}
+
+function drawExplosion() {
+  let explo = new Image();
+  let i = Math.floor(num/10)+1;
+  explo.src = "../ressources/images/explosion"+i+".png";
+  num++;
+  gameCanvasContext.drawImage(explo, playerX, exploY, 50, 50);
 }
 
 function drawExtra() {
@@ -311,12 +332,20 @@ function collisionDetected(enemyId) {
     extraLifes--;
     enemies.splice(enemyId, 1);
   } else {
-    drawGameOver();
+    exploY = playerY;
+    timeGameOver = timeSinceStart;
+    gameOver = true;    
+  }
+}
+
+function resetGame() {
     paused = true;
     enemies = [];
     extra = null;
     extraTiming = Math.floor(Math.random() * 60);
-  }
+    num = 1;
+    gameOver = false;
+    timeGameOver = 0;
 }
 
 function startListeningToDeviceOrientation() {
@@ -344,11 +373,21 @@ function drawStatusBar() {
   gameCanvasContext.fillStyle = "white";
   gameCanvasContext.font = "10pt Arial";
   gameCanvasContext.fillText("Tries " + tries, 20, 15);
-  gameCanvasContext.fillText(
+
+  if(timeGameOver != 0) {
+    gameCanvasContext.fillText(
+      "Time: " + timeGameOver,
+      gameCanvas.width - 70,
+      15
+    );
+  } else {
+    gameCanvasContext.fillText(
     "Time: " + timeSinceStart,
     gameCanvas.width - 70,
     15
   );
+  }
+  
   gameCanvasContext.fillText(
     "Highscore: " + highScore,
     gameCanvas.width / 2 - 50,
@@ -381,18 +420,18 @@ function drawGameOver() {
   gameCanvasContext.fillText("GAME OVER", 50, gameCanvas.height / 2 - 50);
   gameCanvasContext.font = "20px Arial";
   gameCanvasContext.fillText(
-    timeSinceStart + " SEKUNDEN ÜBERLEBT",
+    timeGameOver + " SEKUNDEN ÜBERLEBT",
     250,
     gameCanvas.height / 2
   );
-  if (timeSinceStart > highScore) {
+  if (timeGameOver > highScore) {
     gameCanvasContext.font = "50px Arial";
     gameCanvasContext.fillText(
       "NEUER HIGHSCORE",
       100,
       gameCanvas.height / 2 + 75
     );
-    highScore = timeSinceStart;
+    highScore = timeGameOver;
     localStorage.setItem("Highscore", highScore);
   }
   drawActionToPlay();
